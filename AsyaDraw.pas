@@ -297,6 +297,7 @@ var
 	i: integer;
 	x, y: integer;
 	sizeX, sizeY: integer;
+	mes: string = 'Couldn''t read to the file';
 begin
 	sizeX := 35;
 	sizeY := 6;
@@ -323,9 +324,7 @@ begin
 		GotoXY(x + sizeX, y + i);
 		write('#')
 	end;
-	TextColor(Yellow);
-	GotoXY(x + 4, y + (sizeY div 2));
-	write('Couldn''t read to the file');
+	PrintAnyMes(Yellow, Black, x + 4, y + (sizeY div 2), mes);
 	PrintAsyaDrawLogo;
 	TextColor(White);
 	GotoXY(1, ScreenHeight);
