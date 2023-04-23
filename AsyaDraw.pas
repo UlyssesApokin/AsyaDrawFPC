@@ -176,7 +176,7 @@ begin
 end;
 
 {Change the contents of ImageArray according to user actions}
-procedure SynchronizeScreen(var screen: ImageArray; cur: cursor; code: integer);
+procedure SyncScreen(var screen: ImageArray; cur: cursor; code: integer);
 var
 	coordX, coordY: integer;
 begin
@@ -254,9 +254,35 @@ begin
 	PrintAnyMes(LightCyan, Black, cX, cY + 5, s6);
 end;
 
-procedure MessageCantOpenFile;
+procedure PrintFrame(x, y, sizeX, sizeY: integer);
 var
 	i: integer;
+begin
+	TextColor(LightGray);
+	for i := 0 to sizeX do
+	begin
+		GotoXY(x + i, y);
+		Write('#')
+	end;
+	for i := 0 to sizeX do
+	begin
+		GotoXY(x + i, y + SizeY);
+		Write('#')
+	end;
+	for i := 0 to SizeY do
+	begin
+		GotoXY(x, y + i);
+		Write('#')
+	end;
+	for i := 0 to SizeY do
+	begin
+		GotoXY(x + sizeX, y + i);
+		write('#')
+	end
+end;
+
+procedure MessageCantOpenFile;
+var
 	x, y: integer;
 	sizeX, sizeY: integer;
 	mes: string = 'Couldn''t open the file';
@@ -265,27 +291,7 @@ begin
 	sizeY := 6;
 	x := (ScreenWidth div 2) - (sizeX div 2);
 	y := (ScreenHeight div 2) - 1 - (sizeY div 2);
-	TextColor(LightGray);
-	for i := 0 to sizeX do
-	begin
-		GotoXY(x + i, y);
-		Write('#')
-	end;
-	for i := 0 to sizeX do
-	begin
-		GotoXY(x + i, y + SizeY);
-		Write('#')
-	end;
-	for i := 0 to SizeY do
-	begin
-		GotoXY(x, y + i);
-		Write('#')
-	end;
-	for i := 0 to SizeY do
-	begin
-		GotoXY(x + sizeX, y + i);
-		write('#')
-	end;
+	PrintFrame(x, y, sizeX, sizeY);
 	PrintAnyMes(Yellow, Black, x + 4, y + (sizeY div 2), mes);
 	PrintAsyaDrawLogo;
 	TextColor(White);
@@ -294,7 +300,6 @@ end;
 
 procedure MessageCantReadFile;
 var
-	i: integer;
 	x, y: integer;
 	sizeX, sizeY: integer;
 	mes: string = 'Couldn''t read to the file';
@@ -303,27 +308,7 @@ begin
 	sizeY := 6;
 	x := (ScreenWidth div 2) - (sizeX div 2);
 	y := (ScreenHeight div 2) - 1 - (sizeY div 2);
-	TextColor(LightGray);
-	for i := 0 to sizeX do
-	begin
-		GotoXY(x + i, y);
-		Write('#')
-	end;
-	for i := 0 to sizeX do
-	begin
-		GotoXY(x + i, y + SizeY);
-		Write('#')
-	end;
-	for i := 0 to SizeY do
-	begin
-		GotoXY(x, y + i);
-		Write('#')
-	end;
-	for i := 0 to SizeY do
-	begin
-		GotoXY(x + sizeX, y + i);
-		write('#')
-	end;
+	PrintFrame(x, y, sizeX, sizeY);
 	PrintAnyMes(Yellow, Black, x + 4, y + (sizeY div 2), mes);
 	PrintAsyaDrawLogo;
 	TextColor(White);
@@ -332,7 +317,6 @@ end;
 
 procedure MessageCantWriteFile;
 var
-	i: integer;
 	x, y: integer;
 	sizeX, sizeY: integer;
 	mes: string = 'Couldn''t write to the file';
@@ -341,28 +325,33 @@ begin
 	sizeY := 6;
 	x := (ScreenWidth div 2) - (sizeX div 2);
 	y := (ScreenHeight div 2) - 1 - (sizeY div 2);
-	TextColor(LightGray);
-	for i := 0 to sizeX do
-	begin
-		GotoXY(x + i, y);
-		Write('#')
-	end;
-	for i := 0 to sizeX do
-	begin
-		GotoXY(x + i, y + SizeY);
-		Write('#')
-	end;
-	for i := 0 to SizeY do
-	begin
-		GotoXY(x, y + i);
-		Write('#')
-	end;
-	for i := 0 to SizeY do
-	begin
-		GotoXY(x + sizeX, y + i);
-		write('#')
-	end;
+	PrintFrame(x, y, sizeX, sizeY);
 	PrintAnyMes(Yellow, Black, x + 4, y + (sizeY div 2), mes);
+	PrintAsyaDrawLogo;
+	TextColor(White);
+	GotoXY(1, ScreenHeight);
+end;
+
+procedure MessageScaleScreen(ScrnRes: image);
+var
+	x, y: integer;
+	sizeX, sizeY: integer;
+	mes1: string = 'The size of this image is ';
+	mes2: string = 'The size of your screen workspace is ';
+	mes3: string = 'Scale the workspace to the size of the image';
+begin
+	sizeX := 51;
+	sizeY := 8;
+	x := (ScreenWidth div 2) - (sizeX div 2);
+	y := (ScreenHeight div 2) - (sizeY div 2);
+	PrintFrame(x, y, sizeX, sizeY);
+	PrintAnyMes(Yellow, Black, x + 4, y + (sizeY div 2) - 2, mes1);
+	GotoXY(x + 4, y + (sizeY div 2) - 1);
+	write(ScrnRes.color, 'X', ScrnRes.symbol);
+	PrintAnyMes(Yellow, Black, x + 4, y + (sizeY div 2), mes2);
+	GotoXY(x + 4, y + (sizeY div 2) + 1);
+	write(ScreenWidth, 'X',	ScreenHeight - 1);
+	PrintAnyMes(Yellow, Black, x + 4, y + (sizeY div 2) + 2, mes3);
 	PrintAsyaDrawLogo;
 	TextColor(White);
 	GotoXY(1, ScreenHeight);
@@ -395,7 +384,8 @@ begin
 	end
 end;
 
-procedure NewFile(var f: ImageFile; filename: string; var screen: ImageArray);
+procedure NewFile(var f: ImageFile; filename: string;
+															var screen: ImageArray);
 var
 	ScrnRes: image;
 	coordX, coordY: integer;
@@ -421,53 +411,8 @@ begin
 		close(f)
 end;
 
-procedure MessageScaleScreen(ScrnRes: image);
-var
-	i: integer;
-	x, y: integer;
-	sizeX, sizeY: integer;
-	mes1: string = 'The size of this image is ';
-	mes2: string = 'The size of your screen workspace is ';
-	mes3: string = 'Scale the workspace to the size of the image';
-begin
-	sizeX := 51;
-	sizeY := 8;
-	x := (ScreenWidth div 2) - (sizeX div 2);
-	y := (ScreenHeight div 2) - (sizeY div 2);
-	TextColor(LightGray);
-	for i := 0 to sizeX do
-	begin
-		GotoXY(x + i, y);
-		Write('#')
-	end;
-	for i := 0 to sizeX do
-	begin
-		GotoXY(x + i, y + SizeY);
-		Write('#')
-	end;
-	for i := 0 to SizeY do
-	begin
-		GotoXY(x, y + i);
-		Write('#')
-	end;
-	for i := 0 to SizeY do
-	begin
-		GotoXY(x + sizeX, y + i);
-		write('#')
-	end;
-	PrintAnyMes(Yellow, Black, x + 4, y + (sizeY div 2) - 2, mes1);
-	GotoXY(x + 4, y + (sizeY div 2) - 1);
-	write(ScrnRes.color, 'X', ScrnRes.symbol);
-	PrintAnyMes(Yellow, Black, x + 4, y + (sizeY div 2), mes2);
-	GotoXY(x + 4, y + (sizeY div 2) + 1);
-	write(ScreenWidth, 'X',	ScreenHeight - 1);
-	PrintAnyMes(Yellow, Black, x + 4, y + (sizeY div 2) + 2, mes3);
-	PrintAsyaDrawLogo;
-	TextColor(White);
-	GotoXY(1, ScreenHeight);
-end;
-
-procedure OpenFile(var f: ImageFile; filename: string; var screen: ImageArray);
+procedure OpenFile(var f: ImageFile; filename: string;
+															var screen: ImageArray);
 var
 	ScrnRes: image;
 	coordX, coordY: integer;
@@ -480,7 +425,8 @@ begin
 	seek(f, 0);
 	read(f,ScrnRes);
 	IOResultReadFile;
-	if (ScrnRes.color <> ScreenWidth) and (ScrnRes.symbol <> ScreenHeight -1) then
+	if (ScrnRes.color <> ScreenWidth) 
+	and (ScrnRes.symbol <> ScreenHeight -1) then
 	begin
 		MessageScaleScreen(ScrnRes);
 		halt(1);
@@ -497,8 +443,8 @@ begin
 	close(f)
 end;
 
-procedure SynchronizeFile(var f: ImageFile; var screen: ImageArray;
-																										code: integer);
+procedure SyncFile(var f: ImageFile; var screen: ImageArray;
+																						code: integer);
 var
 	coordX, coordY: integer;
 	n: integer;
@@ -572,8 +518,6 @@ begin
 		NewFile(f, name, scrn)
 end;
 
-
-
 procedure PrintStartScreen;
 var
 	cX, cY, dX: integer;
@@ -634,9 +578,10 @@ begin
 end;
 
 procedure PrintFilename(filename: string);
+var
+	mes: string = ' File: ';
 begin
-	GotoXY(1, ScreenHeight);
-	Write( ' File: ');
+	PrintAnyMes(White, Black, 1, ScreenHeight, mes);
 	ShowReadString(filename, 8, ScreenHeight);
 end;
 
@@ -677,8 +622,8 @@ BEGIN
 		PrintInfo;
 		UpdateScreenUnderCur(screen, cur);
 		MoveCursor(cur, code);
-		SynchronizeScreen(screen, cur, code);
-		SynchronizeFile(AsyaDrawFile, screen, code);
+		SyncScreen(screen, cur, code);
+		SyncFile(AsyaDrawFile, screen, code);
 	until code = cexit;
 	close(AsyaDrawFile);
 	InitScreen(screen)
