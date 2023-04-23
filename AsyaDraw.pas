@@ -236,24 +236,22 @@ end;
 
 procedure PrintAsyaDrawLogo;
 var
-	x, y: integer;
-	LengthLogo: integer = 60;
+	cX, cY: integer;
+	s1: string = '    ___                     ____                     ';
+	s2: string = '   /   |  _______  ______ _/ __ \_________ __      __';
+	s3: string = '  / /| | / ___/ / / / __ `/ / / / ___/ __ `/ | /| / /';
+	s4: string = ' / ___ |(__  ) /_/ / /_/ / /_/ / /  / /_/ /| |/ |/ / ';
+	s5: string = '/_/  |_/____/\__, /\__,_/_____/_/   \__,_/ |__/|__/  ';
+	s6: string = '            /____/                                   ';
 begin
-	x := ScreenWidth div 2 - LengthLogo div 2 + 5;
-	y := 1;
-	TextColor(LightCyan);
-	GotoXY(x, y);
-	write('    ___                     ____                     ');
-	GotoXY(x, y + 1);
-	write('   /   |  _______  ______ _/ __ \_________ __      __');
-	GotoXY(x, y + 2);
-	write('  / /| | / ___/ / / / __ `/ / / / ___/ __ `/ | /| / /');
-	GotoXY(x, y + 3);
-	write(' / ___ |(__  ) /_/ / /_/ / /_/ / /  / /_/ /| |/ |/ / ');
-	GotoXY(x, y + 4);
-	write('/_/  |_/____/\__, /\__,_/_____/_/   \__,_/ |__/|__/  ');
-	GotoXY(x, y + 5);
-	write('            /____/                                   ');
+	cX := ScreenWidth div 2 - Length(s1) div 2 + 1;
+	cY := 1;
+	PrintAnyMes(LightCyan, Black, cX, cY, s1);
+	PrintAnyMes(LightCyan, Black, cX, cY + 1, s2);
+	PrintAnyMes(LightCyan, Black, cX, cY + 2, s3);
+	PrintAnyMes(LightCyan, Black, cX, cY + 3, s4);
+	PrintAnyMes(LightCyan, Black, cX, cY + 4, s5);
+	PrintAnyMes(LightCyan, Black, cX, cY + 5, s6);
 end;
 
 procedure MessageCantOpenFile;
