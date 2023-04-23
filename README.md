@@ -71,3 +71,16 @@ Do not open files of other applications in AsyaDraw.
 * Space - Draw
 * Backspace - Delete
 * Escape - Save & exit
+
+## History of changes
+
+#### v0.1 (2023/04/22)
+
+* Added draw mode and color picker mode
+* Added saving and opening projects
+* Added pseudo-graphical interface
+
+#### v0.1.1 (2023/04/23)
+
+* Pseudo GUI is now scalable
+* Improve readability and code optimization
