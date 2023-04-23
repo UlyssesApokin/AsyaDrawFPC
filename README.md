@@ -4,6 +4,8 @@ AsyaDraw is a free simple ASCII graphics editor using Free Pascal
 
 AsyaDraw uses the CRT library
 
+![Current version: 0.1.1 2023/04/23](/home/jelisej/disk/firstprog/AsyaDrawFPC/AsyaDrawV0.1.1_20230423.png)
+
 ## Minimum system requirements
 
 * GNU/Linux operating system
