@@ -66,6 +66,6 @@ Do not open files of other applications in AsyaDraw.
 * Arrows - Move
 * Keys A..Z, a..z, 0.. 9, !../ - Brush
 * Tab + b,u,g,c,r,m,o,l,d,n,a,e,t,y,w - Change colors
-* space - Draw
+* Space - Draw
 * Backspace - Delete
 * Escape - Save & exit
