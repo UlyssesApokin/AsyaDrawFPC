@@ -215,6 +215,14 @@ begin
 	write(chr(screen[cur.X, cur.Y].symbol))
 end;
 
+procedure PrintAnyMes(color, back, x, y: integer; var mes: string);
+begin
+	TextColor(color);
+	TextBackground(back);
+	GotoXY(x, y);
+	write(mes)
+end;
+
 procedure PrintInfo;
 begin
 	GotoXY(1, 1);
@@ -571,76 +579,65 @@ begin
 		NewFile(f, name, scrn)
 end;
 
+
+
 procedure PrintStartScreen;
 var
-	s: string = 'AsyaDraw is a free simple ASCII graphics editor using Free Pascal';
+	cX, cY, dX: integer;
+	article: string = 'AsyaDraw is a free simple ASCII graphics editor using Free Pascal';
+	tabp: string = 'tab + ';
+	bblack: string = 'b - Black';
+	ublue: string = 'u - blUe';
+	ggren: string = 'g - Green';
+	ccyan: string = 'c - Cyan';
+	rred: string = 'r - Red';
+	mmagen: string = 'm - Magenta';
+	obrown: string = 'o - broWn';
+	lgray: string = 'l - Lightgray';
+	dgray: string = 'd - Darkgray';
+	hblue: string = 'h - ligHtblue';
+	ngren: string = 'n -lightgreeN';
+	acyan: string = 'a - lightcyAn';
+	ered: string = 'e - lightrEd';
+	tmagen: string = 't - lighTmagenTa';
+	yyelow: string = 'y - Yellow';
+	wwhite: string = 'w - White';
+	control: string = 'Arrows - Move; Any key - Brush; Space - Draw; Backspace - delete';
+	vers: string = 'V0.1.1 (2023.04.23)';
+	project: string = 'New/Open File: ';
 begin
+	cX := ScreenWidth div 2;
+	cY := ScreenHeight div 2;
 	PrintAsyaDrawLogo;
-	GotoXY(ScreenWidth div 2 - Length(s) div 2, 8);
-	Write(s);
-	TextColor(White);
-	GotoXY(4, ScreenHeight div 2 + 4);
-	write('tab + ');
-	TextColor(Black);
-	TextBackground(LightGray);
-	GotoXY(10, ScreenHeight div 2 + 4);
-	write('b - Black');
-	TextBackground(Black);
-	TextColor(Blue);
-	GotoXY(10, ScreenHeight div 2 + 5);
-	write('u - blUe');
-	TextColor(Green);
-	GotoXY(10, ScreenHeight div 2 + 6);
-	write('g - Green');
-	TextColor(Cyan);
-	GotoXY(10, ScreenHeight div 2 + 7);
-	write('c - Cyan');
-	TextColor(Red);
-	GotoXY(22, ScreenHeight div 2 + 4);
-	write('r - Red');
-	TextColor(Magenta);
-	GotoXY(22, ScreenHeight div 2 + 5);
-	write('m - Magenta');
-	TextColor(Brown);
-	GotoXY(22, ScreenHeight div 2 + 6);
-	write('o - brOwn');
-	TextColor(LightGray);
-	GotoXY(22, ScreenHeight div 2 + 7);
-	write('l - Lightgray');
-	TextColor(DarkGray);
-	GotoXY(38, ScreenHeight div 2 + 4);
-	write('d - Darkgray');
-	TextColor(LightBlue);
-	GotoXY(38, ScreenHeight div 2 + 5);
-	write('h - ligHtblue');
-	TextColor(LightGreen);
-	GotoXY(38, ScreenHeight div 2 + 6);
-	write('n - lightreeN');
-	TextColor(LightCyan);
-	GotoXY(38, ScreenHeight div 2 + 7);
-	write('a - lightcyAn');
-	TextColor(LightRed);
-	GotoXY(54, ScreenHeight div 2 + 4);
-	write('e - lightrEd');
-	TextColor(LightMagenta);
-	GotoXY(54, ScreenHeight div 2 + 5);
-	write('t - lighTmagenTa');
-	TextColor(Yellow);
-	GotoXY(54, ScreenHeight div 2 + 6);
-	write('y - Yellow');
-	TextColor(White);
-	GotoXY(54, ScreenHeight div 2 + 7);
-	write('w - White');
-	TextBackGround(LightGray);
-	TextColor(Black);
-	GotoXY(10, ScreenHeight div 2 + 10);
-	write('Arrows - Move; Any key - Brush; Space - Draw; Backspace - delete');
-	TextBackground(Black);
-	TextColor(White);
-	GotoXY(ScreenWidth - 13, ScreenHeight);
-	write('V0.1 Alpha');
-	GotoXY(4, ScreenHeight div 2);
-	write('New/Open file: ');
+	PrintAnyMes(LightCyan, Black,cX - Length(article) div 2, 8, article);
+	dX := -36;
+	PrintAnyMes(White, Black, cX + dX, cY + 4, tabp);
+	dX := -30;
+	PrintAnyMes(Black, LightGray, cX + dX, cY + 4, bblack);
+	PrintAnyMes(Blue, Black, cX + dX, cY + 5, ublue);
+	PrintAnyMes(Green, Black, cX + dX, cY + 6, ggren);
+	PrintAnyMes(Cyan, Black, cX + dX, cY + 7, ccyan);
+	dX := -16;
+	PrintAnyMes(Red, Black, cX + dX, cY + 4, rred);
+	PrintAnyMes(Magenta, Black, cX + dX, cY + 5, mmagen);
+	PrintAnyMes(Brown, Black, cX + dX, cY + 6, obrown);
+	PrintAnyMes(LightGray, Black, cX + dX, cY + 7, lgray);
+	dX := 2;
+	PrintAnyMes(DarkGray, Black, cX + dX, cY + 4, dgray);
+	PrintAnyMes(LightBlue, Black, cX + dX, cY + 5, hblue);
+	PrintAnyMes(LightGreen, Black, cX + dX, cY + 6, ngren);
+	PrintAnyMes(LightCyan, Black, cX + dX, cY + 7, acyan);
+	dX := 20;
+	PrintAnyMes(LightRed, Black, cX + dX, cY + 4, ered);
+	PrintAnyMes(LightMagenta, Black, cX + dX, cY + 5, tmagen);
+	PrintAnyMes(Yellow, Black, cX + dX, cY + 6, yyelow);
+	PrintAnyMes(White, Black, cX + dX, cY + 7, wwhite);
+	dX := -33;
+	PrintAnyMes(Black, LightGray, cX + dX, cY + 10, control);
+	dX := -4;
+	PrintAnyMes(White, Black, ScreenWidth - Length(vers) + dX, ScreenHeight, vers);
+	dX := -36;
+	PrintAnyMes(White, Black, cX + dX, cY, project);
 end;
 
 procedure PrintFilename(filename: string);
