@@ -540,18 +540,16 @@ begin
 	end
 end;
 
-procedure ShowReadString(s: string; x, y: integer);
+procedure ShowReadString(mes: string; x, y: integer);
 var
+	s: string = ' ';
 	i: integer;
 begin
-	TextColor(White);
-	for i := 0 to Length(s) do
+	for i := 0 to Length(mes) do
 	begin
-		GotoXY(x + i, y);
-		write(' ');
+		PrintAnyMes(White, Black, x + i, y, s);
 	end;
-	GotoXY(x, y);
-	write(s);
+	PrintAnyMes(White, Black, x, y, mes)
 end;
 
 procedure GetFilename(s: string; var filename: string);
@@ -660,7 +658,7 @@ BEGIN
 	repeat
 		GetKey(code);
 		ReadString(code, enter);
-		ShowReadString(enter, 19, ScreenHeight div 2);
+		ShowReadString(enter,ScreenWidth div 2 - 21 , ScreenHeight div 2);
 		GetFilename(enter, filename);
 		if code = cexit then
 		begin
