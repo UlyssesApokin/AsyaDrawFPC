@@ -224,11 +224,12 @@ begin
 end;
 
 procedure PrintInfo;
+var
+	symb: string = '|Symbol: ';
+	info: string = '| AsyaDraw is a free simple ASCII graphics editor using Free Pascal |';
 begin
-	GotoXY(1, 1);
-	write('|Symbol: ');
-	GotoXY(12, 1);
-	write('| AsyaDraw is a free simple ASCII graphics editor using Free Pascal |');
+	PrintAnyMes(White, Black, 1, 1, symb);
+	PrintAnyMes(White, Black, 12, 1, info);
 end;
 
 {$I-}
