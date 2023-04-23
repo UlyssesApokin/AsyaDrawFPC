@@ -426,11 +426,14 @@ var
 	i: integer;
 	x, y: integer;
 	sizeX, sizeY: integer;
+	mes1: string = 'The size of this image is ';
+	mes2: string = 'The size of your screen workspace is ';
+	mes3: string = 'Scale the workspace to the size of the image';
 begin
 	sizeX := 51;
 	sizeY := 8;
 	x := (ScreenWidth div 2) - (sizeX div 2);
-	y := (ScreenHeight div 2) - 1 - (sizeY div 2);
+	y := (ScreenHeight div 2) - (sizeY div 2);
 	TextColor(LightGray);
 	for i := 0 to sizeX do
 	begin
@@ -452,17 +455,13 @@ begin
 		GotoXY(x + sizeX, y + i);
 		write('#')
 	end;
-	TextColor(Yellow);
-	GotoXY(x + 4, y + (sizeY div 2) - 2);
-	write('The size of this image is ');
+	PrintAnyMes(Yellow, Black, x + 4, y + (sizeY div 2) - 2, mes1);
 	GotoXY(x + 4, y + (sizeY div 2) - 1);
 	write(ScrnRes.color, 'X', ScrnRes.symbol);
-	GotoXY(x + 4, y + (sizeY div 2));
-	write('The size of your screen workspace is ');
+	PrintAnyMes(Yellow, Black, x + 4, y + (sizeY div 2), mes2);
 	GotoXY(x + 4, y + (sizeY div 2) + 1);
 	write(ScreenWidth, 'X',	ScreenHeight - 1);
-	GotoXY(x + 4, y + (sizeY div 2) + 2);
-	write('Scale the workspace to the size of the image');
+	PrintAnyMes(Yellow, Black, x + 4, y + (sizeY div 2) + 2, mes3);
 	PrintAsyaDrawLogo;
 	TextColor(White);
 	GotoXY(1, ScreenHeight);
