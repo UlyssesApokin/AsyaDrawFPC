@@ -508,6 +508,7 @@ begin
 	else
 		FileIsExist := false;
 	filemode := 2;
+	close(f);
 end;
 
 procedure InitFile(var f: ImageFile; name: string; scrn: ImageArray );
