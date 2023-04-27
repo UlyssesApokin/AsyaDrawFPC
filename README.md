@@ -26,6 +26,10 @@ Arch & Arch-based
 ````
 # pacman -S fpc
 ````
+Fedora
+````
+# dnf install fpc
+````
 
 ### 2. Clone repository
 
