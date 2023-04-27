@@ -51,6 +51,10 @@ $ cd AsyaDrawFPC
 ~/AsyaDrawFPC$ rm *.o
 ````
 
+````
+~/AsyaDrawFPC$ rm *.ppu
+````
+
 ### 4. Run the program
 
 ````
