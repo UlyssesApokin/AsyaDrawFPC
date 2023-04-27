@@ -111,6 +111,13 @@ begin
 			cur.DRColor := Yellow
 		else if c = cwhite then
 			cur.DRColor := White
+    else if c = ccolor then
+    begin
+      if cur.DRColor < 15 then
+        cur.DRColor := cur.DRColor + 1
+      else
+        cur.DRColor := 1
+    end
 	end;
 	TextColor(cur.DRColor)
 end;
@@ -541,7 +548,7 @@ var
 	yyelow: string = 'y - Yellow';
 	wwhite: string = 'w - White';
 	control: string = 'Arrows - Move; Any key - Brush; Space - Draw; Backspace - delete';
-	vers: string = 'V0.1.1 (2023.04.23)';
+	vers: string = 'V0.1.2 (2023.04.27)';
 	project: string = 'New/Open File: ';
 begin
 	cX := ScreenWidth div 2;
