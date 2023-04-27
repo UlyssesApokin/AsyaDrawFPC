@@ -77,6 +77,7 @@ Do not open files of other applications in AsyaDraw.
 #### v0.1.2 (2023/04/27)
 
 * Bugs fixed
+* Code optimization
 * Add color change by double tab
 
 #### v0.1.1 (2023/04/23)
