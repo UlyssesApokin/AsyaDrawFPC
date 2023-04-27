@@ -6,6 +6,8 @@ AsyaDraw uses the CRT library
 
 ![Current version: 0.1.1 2023/04/23](https://github.com/UlyssesApokin/AsyaDrawFPC/raw/main/AsyaDraw.png)
 
+![Example](https://github.com/UlyssesApokin/AsyaDrawFPC/raw/main/Example.png)
+
 ## Minimum system requirements
 
 * GNU/Linux operating system
