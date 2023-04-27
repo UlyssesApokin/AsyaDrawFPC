@@ -224,33 +224,6 @@ end;
 
 {I-}
 
-procedure IOResultOpenFile;
-begin
-	if IOResult <> 0 then
-	begin
-		MessageCantOpenFile;
-		halt(1)
-	end
-end;
-
-procedure IOResultWriteFile;
-begin
-	if IOResult <> 0 then
-	begin
-		MessageCantWriteFile;
-		halt(1)
-	end
-end;
-
-procedure IOResultReadFile;
-begin
-	if IOResult <> 0 then
-	begin
-		MessageCantReadFile;
-		halt(1)
-	end
-end;
-
 procedure NewFile(var f: ImageFile; filename: string;
 															var screen: ImageArray);
 var

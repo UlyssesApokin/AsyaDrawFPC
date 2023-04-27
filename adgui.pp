@@ -6,12 +6,6 @@ procedure PrintInfo;
 
 procedure PrintAsyaDrawLogo;
 
-procedure MessageCantOpenFile;
-
-procedure MessageCantReadFile;
-
-procedure MessageCantWriteFile;
-
 procedure MessageScaleScreen(ScrnWidth, ScrnHeight: integer);
 
 procedure PrintStartScreen;
@@ -19,6 +13,12 @@ procedure PrintStartScreen;
 procedure ShowReadString(mes: string; x, y: integer);
 
 procedure PrintFilename(filename: string);
+
+procedure IOResultOpenFile;
+
+procedure IOResultWriteFile;
+
+procedure IOResultReadFile;
 
 implementation
 uses crt;
@@ -242,6 +242,33 @@ var
 begin
 	PrintAnyMes(White, Black, 1, ScreenHeight, mes);
 	ShowReadString(filename, 8, ScreenHeight);
+end;
+
+procedure IOResultOpenFile;
+begin
+	if IOResult <> 0 then
+	begin
+		MessageCantOpenFile;
+		halt(1)
+	end
+end;
+
+procedure IOResultWriteFile;
+begin
+	if IOResult <> 0 then
+	begin
+		MessageCantWriteFile;
+		halt(1)
+	end
+end;
+
+procedure IOResultReadFile;
+begin
+	if IOResult <> 0 then
+	begin
+		MessageCantReadFile;
+		halt(1)
+	end
 end;
 
 end.
