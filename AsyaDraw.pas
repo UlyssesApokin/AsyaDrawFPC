@@ -222,7 +222,7 @@ begin
 	write(chr(screen[cur.X, cur.Y].symbol))
 end;
 
-{I-}
+{$I-}
 
 procedure NewFile(var f: ImageFile; filename: string;
 															var screen: ImageArray);
@@ -233,11 +233,11 @@ var
 begin
 	assign(f, filename);
 	rewrite(f);
-	IOResultOpenFile;
+	IOResultCreateFile;
 	{Writing meta information to a file}
 	ScrnRes.color := ScreenWidth;
 	ScrnRes.symbol := ScreenHeight - 1;
-	seek(f, 0);
+	seek(f, 0); 
 	write(f, ScrnRes);
 	IOResultWriteFile;
 	for coordX := 1 to ScreenWidth do
@@ -329,6 +329,7 @@ begin
 	filename := s;
 end;
 
+
 function FileIsExist(var f: ImageFile; name: string): boolean;
 begin
 	assign(f, name);
@@ -339,10 +340,9 @@ begin
 	else
 		FileIsExist := false;
 	filemode := 2;
-	close(f);
 end;
 
-procedure InitFile(var f: ImageFile; name: string; scrn: ImageArray );
+procedure InitFile(var f: ImageFile; name: string; scrn: ImageArray);
 begin
 	if FileIsExist(f, name) then
 		OpenFile(f, name, scrn)

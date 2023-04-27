@@ -1,5 +1,7 @@
 unit adgui;
 
+{$I-}
+
 interface
 
 procedure PrintInfo;
@@ -17,6 +19,8 @@ procedure PrintFilename(filename: string);
 procedure IOResultOpenFile;
 
 procedure IOResultWriteFile;
+
+procedure IOResultCreateFile;
 
 procedure IOResultReadFile;
 
@@ -94,6 +98,23 @@ var
 	x, y: integer;
 	sizeX, sizeY: integer;
 	mes: string = 'Couldn''t open the file';
+begin
+	sizeX := 29;
+	sizeY := 6;
+	x := (ScreenWidth div 2) - (sizeX div 2);
+	y := (ScreenHeight div 2) - 1 - (sizeY div 2);
+	PrintFrame(x, y, sizeX, sizeY);
+	PrintAnyMes(Yellow, Black, x + 4, y + (sizeY div 2), mes);
+	PrintAsyaDrawLogo;
+	TextColor(White);
+	GotoXY(1, ScreenHeight);
+end;
+
+procedure MessageCantCreateFile;
+var
+	x, y: integer;
+	sizeX, sizeY: integer;
+	mes: string = 'Couldn''t create the file';
 begin
 	sizeX := 29;
 	sizeY := 6;
@@ -249,6 +270,15 @@ begin
 	if IOResult <> 0 then
 	begin
 		MessageCantOpenFile;
+		halt(1)
+	end
+end;
+
+procedure IOResultCreateFile;
+begin
+	if IOResult <> 0 then
+	begin
+		MessageCantCreateFile;
 		halt(1)
 	end
 end;
