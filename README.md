@@ -4,7 +4,7 @@ AsyaDraw is a free simple ASCII graphics editor using Free Pascal
 
 AsyaDraw uses the CRT library
 
-![Current version: 0.1.1 2023/04/23](https://github.com/UlyssesApokin/AsyaDrawFPC/raw/main/AsyaDrawV0.1.1_20230423.png)
+![Current version: 0.1.1 2023/04/23](https://github.com/UlyssesApokin/AsyaDrawFPC/raw/main/AsyaDraw.png)
 
 ## Minimum system requirements
 
@@ -67,20 +67,25 @@ Do not open files of other applications in AsyaDraw.
 
 * Arrows - Move
 * Keys A..Z, a..z, 0.. 9, !../ - Brush
-* Tab + b,u,g,c,r,m,o,l,d,n,a,e,t,y,w - Change colors
+* Tab + tab,b,u,g,c,r,m,o,l,d,n,a,e,t,y,w - Change colors
 * Space - Draw
 * Backspace - Delete
 * Escape - Save & exit
 
 ## History of changes
 
-#### v0.1 (2023/04/22)
+#### v0.1.2 (2023/04/27)
 
-* Added draw mode and color picker mode
-* Added saving and opening projects
-* Added pseudo-graphical interface
+* Bugs fixed
+* Add color change by double tab
 
 #### v0.1.1 (2023/04/23)
 
 * Pseudo GUI is now scalable
 * Improve readability and code optimization
+
+#### v0.1 (2023/04/22)
+
+* Added draw mode and color picker mode
+* Added saving and opening projects
+* Added pseudo-graphical interface
