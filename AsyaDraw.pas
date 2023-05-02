@@ -269,8 +269,8 @@ begin
 	if (ScrnRes.color <> ScreenWidth) 
 	and (ScrnRes.symbol <> ScreenHeight -1) then
 	begin
-    x := ScreenWidth;
-    y := ScreenHeight - 1;
+    x := ScrnRes.color;
+    y := ScrnRes.symbol;
 		MessageScaleScreen(x, y);
 		halt(1);
 		exit;
