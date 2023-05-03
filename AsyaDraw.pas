@@ -339,7 +339,7 @@ begin
 		FileIsExist := true
 	else
 		FileIsExist := false;
-	filemode := 2;
+	filemode := 2
 end;
 
 procedure InitFile(var f: ImageFile; name: string; scrn: ImageArray);
