@@ -364,7 +364,16 @@ BEGIN
 		GetKey(code);
 		ReadString(code, enter);
 		ShowReadString(enter,ScreenWidth div 2 - 21 , ScreenHeight div 2);
-		GetFilename(enter, filename);
+    if enter = '/about' then
+    begin
+      clrscr;
+      PrintAboutPage;
+      GetKey(code);
+      clrscr;
+      PrintStartScreen;
+      code := 0;
+      enter := ''
+    end;
 		if code = cexit then
 		begin
 			clrscr;
@@ -372,6 +381,7 @@ BEGIN
 		end;
 	until code = 13;
 	clrscr;
+  GetFilename(enter, filename);
 	PrintFilename(filename);
 	InitFile(AsyaDrawFile, filename, screen);
 	assign(AsyaDrawFile, filename);

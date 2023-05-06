@@ -82,7 +82,13 @@ Do not open files of other applications in AsyaDraw.
 * Backspace - Delete
 * Escape - Save & exit
 
+* "/about" - Read application information
+
 ## History of changes
+
+#### v0.1.3 (2023/05/06)
+
+* Add application information
 
 #### v0.1.2 (2023/04/27)
 

@@ -8,6 +8,8 @@ procedure PrintInfo;
 
 procedure PrintAsyaDrawLogo;
 
+procedure PrintAboutPage;
+
 procedure MessageScaleScreen(ScrnWidth, ScrnHeight: integer);
 
 procedure PrintStartScreen;
@@ -64,6 +66,53 @@ begin
 	PrintAnyMes(LightCyan, Black, cX, cY + 3, s4);
 	PrintAnyMes(LightCyan, Black, cX, cY + 4, s5);
 	PrintAnyMes(LightCyan, Black, cX, cY + 5, s6);
+end;
+
+procedure PrintAboutPage;
+var
+  cX, cY: integer;
+  s1: string = 'ASYADRAW';
+  s2: string = 'Author: Ulysses Apokin (JELISEJ APOKIN)';
+  s3: string = 'Contacts: aoipkn@yandex.ru';
+  s4: string = '          greenoctopuscinema@gmail.com';
+  s5: string = '          @epo124 (Telegram)';
+  s6: string = 'LICENSE';
+  s7: string = 'This  license establishes the rules for using and distributing the AsyaDraw';
+  s8: string = 'program.  You are allowed to freely  execute  the program for any  purpose.';
+  s9: string = 'It is allowed to modify the text of the program.  Permission is  granted to';
+  s10: string = 'distribute FREE copies of this program to others. It is allowed to transfer';
+  s11: string = 'modified copies of  the program to others,  with a MANDATORY description of';
+  s12: string = 'the changes made. ';
+  s13: string = 'SOURCE CODE';
+  s14: string = 'https://github.com/UlyssesApokin/AsyaDrawFPC.git';
+begin
+  PrintAsyaDrawLogo;
+  cX := ScreenWidth div 2 - Length(s1) div 2 + 1;
+  cY := 8;
+  PrintAnyMes(LightCyan, Black, cX, cY, s1);
+  cY := 8;
+  cX := ScreenWidth div 2 - Length(s2) div 2 + 1;
+  PrintAnyMes(White, Black, cX, cY + 1, s2);
+  PrintAnyMes(White, Black, cX, cY + 2, s3);
+  PrintAnyMes(White, Black, cX, cY + 3, s4);
+  PrintAnyMes(White, Black, cX, cY + 4, s5);
+  cY := 14;
+  cX := ScreenWidth div 2 - Length(s6) div 2 + 1;
+  PrintAnyMes(LightCyan, Black, cX, cY, s6);
+  cY := 15;
+  cX := ScreenWidth div 2 - Length(s7) div 2 + 1;
+  PrintAnyMes(White, Black, cX, cY, s7);
+  PrintAnyMes(White, Black, cX, cY + 1, s8);
+  PrintAnyMes(White, Black, cX, cY + 2, s9);
+  PrintAnyMes(White, Black, cX, cY + 3, s10);
+  PrintAnyMes(White, Black, cX, cY + 4, s11);
+  PrintAnyMes(White, Black, cX, cY + 5, s12);
+  cY := 21;
+  cX := ScreenWidth div 2 - Length(s13) div 2 + 1;
+  PrintAnyMes(LightCyan, Black, cX, cY, s13);
+  cY := 22;
+  cX := ScreenWidth div 2 - Length(s14) div 2 + 1;
+  PrintAnyMes(White, Black, cX, cY, s14);
 end;
 
 procedure PrintFrame(x, y, sizeX, sizeY: integer);
@@ -208,7 +257,7 @@ var
 	yyelow: string = 'y - Yellow';
 	wwhite: string = 'w - White';
 	control: string = 'Arrows - Move; Any key - Brush; Space - Draw; Backspace - delete';
-	vers: string = 'V0.1.2 (2023.04.27)';
+	vers: string = 'V0.1.3 (2023.05.06)';
 	project: string = 'New/Open File: ';
 begin
 	cX := ScreenWidth div 2;
