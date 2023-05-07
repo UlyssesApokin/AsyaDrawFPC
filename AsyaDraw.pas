@@ -374,6 +374,16 @@ BEGIN
       code := 0;
       enter := ''
     end;
+    if enter = '/help' then
+    begin
+      clrscr;
+      PrintHelpPage;
+      GetKey(code);
+      clrscr;
+      PrintStartScreen;
+      code := 0;
+      enter := ''
+    end;
 		if code = cexit then
 		begin
 			clrscr;

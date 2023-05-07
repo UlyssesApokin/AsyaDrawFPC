@@ -10,6 +10,8 @@ procedure PrintAsyaDrawLogo;
 
 procedure PrintAboutPage;
 
+procedure PrintHelpPage;
+
 procedure MessageScaleScreen(ScrnWidth, ScrnHeight: integer);
 
 procedure PrintStartScreen;
@@ -113,6 +115,50 @@ begin
   cY := 22;
   cX := ScreenWidth div 2 - Length(s14) div 2 + 1;
   PrintAnyMes(White, Black, cX, cY, s14);
+end;
+
+procedure PrintHelpPage;
+var
+  cX, cY: integer;
+  s1: string = 'START';
+  s2: string = 'To start creating  beautiful images, enter the name of your work in the line';
+  s3: string = '"New/Open File:".  This operation will  create  a file with the same name in';
+  s4: string = 'the directory where the program is running.  If a file with that name already';
+  s5: string = 'exists, it will  be opened.';
+  s6: string = 'DRAW';
+  s7: string = 'Use the arrows on the keyboard to move the cursor on the screen. In the upper';
+  s8: string = 'left corner  you will see the symbol and  the color with which you draw.  To';
+  s9: string = 'change the drawing symbol, use any key on the keyboard. For example, the "g"';
+  s10: string = 'or  "#"  key.  To  change the  drawing color,  use double tab or alternately';
+  s11: string = 'press  tab and then any of the keys  "b"/ "u"/ "g"/ "c"/ "r"/ "m"/ "o"/ "l"/';
+  s12: string = '"d"/ "n"/ "a"/ "e"/ "t"/ "y"/ "w".  Press  the space bar to draw a symbol on';
+  s13: string = 'the screen. And backspace to delete the character.';
+  s14: string = 'SAVE & EXIT';
+  s15: string = 'Your work is saved in real time. Press escape to exit the program.  You will';
+  s16: string = 'see  your image file  in the directory  from which the program was launched.';
+  s17: string = 'To open it, use AsyaDraw.';
+begin
+  cX := ScreenWidth div 2;
+  cY := 2;
+  PrintAnyMes(LightCyan, Black, cX - Length(s1) div 2, cY, s1);
+  PrintAnyMes(White, Black, cX - Length(s2) div 2, cY + 1, s2);
+  PrintAnyMes(White, Black, cX - Length(s2) div 2, cY + 2, s3);
+  PrintAnyMes(White, Black, cX - Length(s2) div 2, cY + 3, s4);
+  PrintAnyMes(White, Black, cX - Length(s2) div 2, cY + 4, s5);
+  cY := 8;
+  PrintAnyMes(LightCyan, Black, cX - Length(s6) div 2, cY, s6);
+  PrintAnyMes(White, Black, cX - Length(s8) div 2, cY + 1, s7);
+  PrintAnyMes(White, Black, cX - Length(s8) div 2, cY + 2, s8);
+  PrintAnyMes(White, Black, cX - Length(s8) div 2, cY + 3, s9);
+  PrintAnyMes(White, Black, cX - Length(s8) div 2, cY + 4, s10);
+  PrintAnyMes(White, Black, cX - Length(s8) div 2, cY + 5, s11);
+  PrintAnyMes(White, Black, cX - Length(s8) div 2, cY + 6, s12);
+  PrintAnyMes(White, Black, cX - Length(s8) div 2, cY + 7, s13);
+  cY := 17;
+  PrintAnyMes(LightCyan, Black, cX - Length(s14) div 2, cY, s14);
+  PrintAnyMes(White, Black, cX - Length(s15) div 2, cY + 1, s15);
+  PrintAnyMes(White, Black, cX - Length(s15) div 2, cY + 2, s16);
+  PrintAnyMes(White, Black, cX - Length(s15) div 2, cY + 3, s17);
 end;
 
 procedure PrintFrame(x, y, sizeX, sizeY: integer);
@@ -259,11 +305,13 @@ var
 	control: string = 'Arrows - Move; Any key - Brush; Space - Draw; Backspace - delete';
 	vers: string = 'V0.1.3 (2023.05.06)';
 	project: string = 'New/Open File: ';
+  abpage: string = 'Type /about - for more information or /help - for help';
 begin
 	cX := ScreenWidth div 2;
 	cY := ScreenHeight div 2;
 	PrintAsyaDrawLogo;
 	PrintAnyMes(LightCyan, Black,cX - Length(article) div 2, 8, article);
+    PrintAnyMes(Black, LightGray, cX - Length(abpage) div 2, cY - 2, abpage);
 	dX := -36;
 	PrintAnyMes(White, Black, cX + dX, cY + 4, tabp);
 	dX := -30;
@@ -292,6 +340,7 @@ begin
 	PrintAnyMes(White, Black, ScreenWidth - Length(vers) + dX, ScreenHeight, vers);
 	dX := -36;
 	PrintAnyMes(White, Black, cX + dX, cY, project);
+
 end;
 
 procedure ShowReadString(mes: string; x, y: integer);
