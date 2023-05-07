@@ -8,13 +8,13 @@ procedure PrintInfo;
 
 procedure PrintAsyaDrawLogo;
 
+procedure PrintStartScreen;
+
 procedure PrintAboutPage;
 
 procedure PrintHelpPage;
 
 procedure MessageScaleScreen(ScrnWidth, ScrnHeight: integer);
-
-procedure PrintStartScreen;
 
 procedure ShowReadString(mes: string; x, y: integer);
 
@@ -48,8 +48,6 @@ begin
 	PrintAnyMes(White, Black, 12, 1, info);
 end;
 
-{$I-}
-
 procedure PrintAsyaDrawLogo;
 var
 	cX, cY: integer;
@@ -70,6 +68,68 @@ begin
 	PrintAnyMes(LightCyan, Black, cX, cY + 5, s6);
 end;
 
+procedure PrintStartScreen;
+var
+	cX, cY, dX: integer;
+	article: string = 'AsyaDraw is a free simple ASCII graphics editor using Free Pascal';
+	tabp: string = 'tab + ';
+	bblack: string = 'b - Black';
+	ublue: string = 'u - blUe';
+	ggren: string = 'g - Green';
+	ccyan: string = 'c - Cyan';
+	rred: string = 'r - Red';
+	mmagen: string = 'm - Magenta';
+	obrown: string = 'o - broWn';
+	lgray: string = 'l - Lightgray';
+	dgray: string = 'd - Darkgray';
+	hblue: string = 'h - ligHtblue';
+	ngren: string = 'n -lightgreeN';
+	acyan: string = 'a - lightcyAn';
+	ered: string = 'e - lightrEd';
+	tmagen: string = 't - lighTmagenTa';
+	yyelow: string = 'y - Yellow';
+	wwhite: string = 'w - White';
+	control: string = 'Arrows - Move; Any key - Brush; Space - Draw; Backspace - delete';
+	vers: string = 'V0.2 (2023.05.07)';
+	project: string = 'New/Open File: ';
+  abpage: string = 'Type /about - for more information or /help - for help';
+begin
+  clrscr;
+	cX := ScreenWidth div 2;
+	cY := ScreenHeight div 2;
+	PrintAsyaDrawLogo;
+	PrintAnyMes(LightCyan, Black,cX - Length(article) div 2, 8, article);
+    PrintAnyMes(Black, LightGray, cX - Length(abpage) div 2, cY - 2, abpage);
+	dX := -36;
+	PrintAnyMes(White, Black, cX + dX, cY + 4, tabp);
+	dX := -30;
+	PrintAnyMes(Black, LightGray, cX + dX, cY + 4, bblack);
+	PrintAnyMes(Blue, Black, cX + dX, cY + 5, ublue);
+	PrintAnyMes(Green, Black, cX + dX, cY + 6, ggren);
+	PrintAnyMes(Cyan, Black, cX + dX, cY + 7, ccyan);
+	dX := -16;
+	PrintAnyMes(Red, Black, cX + dX, cY + 4, rred);
+	PrintAnyMes(Magenta, Black, cX + dX, cY + 5, mmagen);
+	PrintAnyMes(Brown, Black, cX + dX, cY + 6, obrown);
+	PrintAnyMes(LightGray, Black, cX + dX, cY + 7, lgray);
+	dX := 2;
+	PrintAnyMes(DarkGray, Black, cX + dX, cY + 4, dgray);
+	PrintAnyMes(LightBlue, Black, cX + dX, cY + 5, hblue);
+	PrintAnyMes(LightGreen, Black, cX + dX, cY + 6, ngren);
+	PrintAnyMes(LightCyan, Black, cX + dX, cY + 7, acyan);
+	dX := 20;
+	PrintAnyMes(LightRed, Black, cX + dX, cY + 4, ered);
+	PrintAnyMes(LightMagenta, Black, cX + dX, cY + 5, tmagen);
+	PrintAnyMes(Yellow, Black, cX + dX, cY + 6, yyelow);
+	PrintAnyMes(White, Black, cX + dX, cY + 7, wwhite);
+	dX := -33;
+	PrintAnyMes(Black, LightGray, cX + dX, cY + 10, control);
+	dX := -4;
+	PrintAnyMes(White, Black, ScreenWidth - Length(vers) + dX, ScreenHeight, vers);
+	dX := -36;
+	PrintAnyMes(White, Black, cX + dX, cY, project);
+end;
+
 procedure PrintAboutPage;
 var
   cX, cY: integer;
@@ -88,6 +148,7 @@ var
   s13: string = 'SOURCE CODE';
   s14: string = 'https://github.com/UlyssesApokin/AsyaDrawFPC.git';
 begin
+  clrscr;
   PrintAsyaDrawLogo;
   cX := ScreenWidth div 2 - Length(s1) div 2 + 1;
   cY := 8;
@@ -138,6 +199,7 @@ var
   s16: string = 'see  your image file  in the directory  from which the program was launched.';
   s17: string = 'To open it, use AsyaDraw.';
 begin
+  clrscr;
   cX := ScreenWidth div 2;
   cY := 2;
   PrintAnyMes(LightCyan, Black, cX - Length(s1) div 2, cY, s1);
@@ -194,6 +256,7 @@ var
 	sizeX, sizeY: integer;
 	mes: string = 'Couldn''t open the file';
 begin
+  clrscr;
 	sizeX := 29;
 	sizeY := 6;
 	x := (ScreenWidth div 2) - (sizeX div 2);
@@ -211,6 +274,7 @@ var
 	sizeX, sizeY: integer;
 	mes: string = 'Couldn''t create the file';
 begin
+  clrscr;
 	sizeX := 29;
 	sizeY := 6;
 	x := (ScreenWidth div 2) - (sizeX div 2);
@@ -228,6 +292,7 @@ var
 	sizeX, sizeY: integer;
 	mes: string = 'Couldn''t read to the file';
 begin
+  clrscr;
 	sizeX := 35;
 	sizeY := 6;
 	x := (ScreenWidth div 2) - (sizeX div 2);
@@ -245,6 +310,7 @@ var
 	sizeX, sizeY: integer;
 	mes: string = 'Couldn''t write to the file';
 begin
+  clrscr;
 	sizeX := 36;
 	sizeY := 6;
 	x := (ScreenWidth div 2) - (sizeX div 2);
@@ -264,6 +330,7 @@ var
 	mes2: string = 'The size of your screen workspace is ';
 	mes3: string = 'Scale the workspace to the size of the image';
 begin
+  clrscr;
 	sizeX := 51;
 	sizeY := 8;
 	x := (ScreenWidth div 2) - (sizeX div 2);
@@ -279,68 +346,6 @@ begin
 	PrintAsyaDrawLogo;
 	TextColor(White);
 	GotoXY(1, ScreenHeight);
-end;
-
-procedure PrintStartScreen;
-var
-	cX, cY, dX: integer;
-	article: string = 'AsyaDraw is a free simple ASCII graphics editor using Free Pascal';
-	tabp: string = 'tab + ';
-	bblack: string = 'b - Black';
-	ublue: string = 'u - blUe';
-	ggren: string = 'g - Green';
-	ccyan: string = 'c - Cyan';
-	rred: string = 'r - Red';
-	mmagen: string = 'm - Magenta';
-	obrown: string = 'o - broWn';
-	lgray: string = 'l - Lightgray';
-	dgray: string = 'd - Darkgray';
-	hblue: string = 'h - ligHtblue';
-	ngren: string = 'n -lightgreeN';
-	acyan: string = 'a - lightcyAn';
-	ered: string = 'e - lightrEd';
-	tmagen: string = 't - lighTmagenTa';
-	yyelow: string = 'y - Yellow';
-	wwhite: string = 'w - White';
-	control: string = 'Arrows - Move; Any key - Brush; Space - Draw; Backspace - delete';
-	vers: string = 'V0.1.3 (2023.05.06)';
-	project: string = 'New/Open File: ';
-  abpage: string = 'Type /about - for more information or /help - for help';
-begin
-	cX := ScreenWidth div 2;
-	cY := ScreenHeight div 2;
-	PrintAsyaDrawLogo;
-	PrintAnyMes(LightCyan, Black,cX - Length(article) div 2, 8, article);
-    PrintAnyMes(Black, LightGray, cX - Length(abpage) div 2, cY - 2, abpage);
-	dX := -36;
-	PrintAnyMes(White, Black, cX + dX, cY + 4, tabp);
-	dX := -30;
-	PrintAnyMes(Black, LightGray, cX + dX, cY + 4, bblack);
-	PrintAnyMes(Blue, Black, cX + dX, cY + 5, ublue);
-	PrintAnyMes(Green, Black, cX + dX, cY + 6, ggren);
-	PrintAnyMes(Cyan, Black, cX + dX, cY + 7, ccyan);
-	dX := -16;
-	PrintAnyMes(Red, Black, cX + dX, cY + 4, rred);
-	PrintAnyMes(Magenta, Black, cX + dX, cY + 5, mmagen);
-	PrintAnyMes(Brown, Black, cX + dX, cY + 6, obrown);
-	PrintAnyMes(LightGray, Black, cX + dX, cY + 7, lgray);
-	dX := 2;
-	PrintAnyMes(DarkGray, Black, cX + dX, cY + 4, dgray);
-	PrintAnyMes(LightBlue, Black, cX + dX, cY + 5, hblue);
-	PrintAnyMes(LightGreen, Black, cX + dX, cY + 6, ngren);
-	PrintAnyMes(LightCyan, Black, cX + dX, cY + 7, acyan);
-	dX := 20;
-	PrintAnyMes(LightRed, Black, cX + dX, cY + 4, ered);
-	PrintAnyMes(LightMagenta, Black, cX + dX, cY + 5, tmagen);
-	PrintAnyMes(Yellow, Black, cX + dX, cY + 6, yyelow);
-	PrintAnyMes(White, Black, cX + dX, cY + 7, wwhite);
-	dX := -33;
-	PrintAnyMes(Black, LightGray, cX + dX, cY + 10, control);
-	dX := -4;
-	PrintAnyMes(White, Black, ScreenWidth - Length(vers) + dX, ScreenHeight, vers);
-	dX := -36;
-	PrintAnyMes(White, Black, cX + dX, cY, project);
-
 end;
 
 procedure ShowReadString(mes: string; x, y: integer);

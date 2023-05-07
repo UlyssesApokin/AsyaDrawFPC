@@ -2,12 +2,13 @@ program AsyaDraw;
 uses crt, adgui;
 
 const
-	{GetKey code}				{ASCII symbol}
+	{GetKey code}			  	{ASCII symbol}
 	up = -72;							{up_arrow}
 	left = -75;						{left_arrow}
 	down = -80;						{down_arrow}
 	right = -77;					{right_arrow}
 	cexit = 27;						{esc}
+  center = 13;          {enter}
 	cdraw = 32;						{space}
 	cdelete = 8;					{backspace}
 	ccolor = 9;						{tab}
@@ -360,26 +361,50 @@ BEGIN
 	InitCursor(cur);
 	InitScreen(screen);
 	PrintStartScreen;
-	repeat
+	while true do
+  begin
 		GetKey(code);
 		ReadString(code, enter);
 		ShowReadString(enter,ScreenWidth div 2 - 21 , ScreenHeight div 2);
     if enter = '/about' then
     begin
-      clrscr;
       PrintAboutPage;
       GetKey(code);
-      clrscr;
       PrintStartScreen;
       code := 0;
       enter := ''
     end;
     if enter = '/help' then
     begin
-      clrscr;
       PrintHelpPage;
       GetKey(code);
-      clrscr;
+      PrintStartScreen;
+      code := 0;
+      enter := ''
+    end;
+    if code = center then
+    begin
+      GetFilename(enter, filename);
+      PrintFilename(filename);
+      InitFile(AsyaDrawFile, filename, screen);
+      assign(AsyaDrawFile, filename);
+      reset(AsyaDrawFile);
+      IOResultOpenFile;
+      FullUpdateScreen(screen);
+      TextColor(White);
+      PrintInfo;
+      repeat
+        GetKey(code);
+        DrawColor(cur, code);
+        DrawSymbol(cur, code);
+        PrintInfo;
+        UpdateScreenUnderCur(screen, cur);
+        MoveCursor(cur, code);
+        SyncScreen(screen, cur, code);
+        SyncFile(AsyaDrawFile, screen, code);
+      until code = cexit;
+      close(AsyaDrawFile);
+      InitScreen(screen);
       PrintStartScreen;
       code := 0;
       enter := ''
@@ -387,29 +412,7 @@ BEGIN
 		if code = cexit then
 		begin
 			clrscr;
-			halt(1);
-		end;
-	until code = 13;
-	clrscr;
-  GetFilename(enter, filename);
-	PrintFilename(filename);
-	InitFile(AsyaDrawFile, filename, screen);
-	assign(AsyaDrawFile, filename);
-	reset(AsyaDrawFile);
-	IOResultOpenFile;
-	FullUpdateScreen(screen);
-	TextColor(White);
-	PrintInfo;
-	repeat
-		GetKey(code);
-		DrawColor(cur, code);
-		DrawSymbol(cur, code);
-		PrintInfo;
-		UpdateScreenUnderCur(screen, cur);
-		MoveCursor(cur, code);
-		SyncScreen(screen, cur, code);
-		SyncFile(AsyaDrawFile, screen, code);
-	until code = cexit;
-	close(AsyaDrawFile);
-	InitScreen(screen)
+			halt(0);
+		end
+	end
 END.
