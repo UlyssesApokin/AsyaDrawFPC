@@ -86,9 +86,15 @@ Do not open files of other applications in AsyaDraw.
 
 ## History of changes
 
+#### v0.2 (2023/05/07)
+
+* Added help page
+* The program no longer closes when exiting edit mode
+* Code optimization
+
 #### v0.1.3 (2023/05/06)
 
-* Add application information
+* Added application information
 
 #### v0.1.2 (2023/04/27)
 
