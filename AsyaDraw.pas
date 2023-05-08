@@ -67,58 +67,49 @@ end;
 
 procedure DrawSymbol(var cur: cursor; code: integer);
 begin
-	if (code >= 33) and (code <= 126) then
-	begin
-		cur.DRSymbol := code
-	end
+  cur.DRSymbol := code
 end;
 
 procedure DrawColor(var cur: cursor; code: integer);
-var
-	c: integer;
 begin
-	if code = ccolor then
-	begin
-		GetKey(c);
-		if c = cblack then
-			cur.DRColor := Black
-		else if c = cblue then
-			cur.DRColor := Blue
-		else if c = cgreen then
-			cur.DRColor := Green
-		else if c = ccyan then
-			cur.DRColor := Cyan
-		else if c = cred then
-			cur.DRColor := Red
-		else if c = cmagenta then
-			cur.DRcolor := Magenta
-		else if c = cbrown then
-			cur.DRColor := Brown
-		else if c = clightgray then
-			cur.DRColor := LightGray
-		else if c = cdarkgray then
-			cur.DRColor := DarkGray
-		else if c = clightblue then
-			cur.DRColor := LightBlue
-		else if c = clightgreen then
-			cur.DRColor := LightGreen
-		else if c = clightcyan then
-			cur.DRColor := LightCyan
-		else if c = clightred then
-			cur.DRColor := LightRed
-		else if c = clightmagenta then
-			cur.DRColor := LightMagenta
-		else if c = cyellow then
-			cur.DRColor := Yellow
-		else if c = cwhite then
-			cur.DRColor := White
-    else if c = ccolor then
-    begin
-      if cur.DRColor < 15 then
-        cur.DRColor := cur.DRColor + 1
-      else
-        cur.DRColor := 1
-    end
+  if code = cblack then
+    cur.DRColor := Black
+  else if code = cblue then
+    cur.DRColor := Blue
+  else if code = cgreen then
+    cur.DRColor := Green
+  else if code = ccyan then
+    cur.DRColor := Cyan
+  else if code = cred then
+    cur.DRColor := Red
+  else if code = cmagenta then
+    cur.DRcolor := Magenta
+  else if code = cbrown then
+    cur.DRColor := Brown
+  else if code = clightgray then
+    cur.DRColor := LightGray
+  else if code = cdarkgray then
+    cur.DRColor := DarkGray
+  else if code = clightblue then
+    cur.DRColor := LightBlue
+  else if code = clightgreen then
+    cur.DRColor := LightGreen
+  else if code = clightcyan then
+    cur.DRColor := LightCyan
+  else if code = clightred then
+    cur.DRColor := LightRed
+  else if code = clightmagenta then
+    cur.DRColor := LightMagenta
+  else if code = cyellow then
+    cur.DRColor := Yellow
+  else if code = cwhite then
+    cur.DRColor := White
+  else if code = ccolor then
+  begin
+    if cur.DRColor < 15 then
+      cur.DRColor := cur.DRColor + 1
+    else
+      cur.DRColor := 1
 	end;
 	TextColor(cur.DRColor)
 end;
@@ -154,8 +145,7 @@ begin
 		cur.Y := cur.Y + cur.dY
 	else if code = up then
 		cur.Y := Cur.Y - cur.dY;
-	CurWithinBorders(cur);
-	ShowCursor(cur)
+	CurWithinBorders(cur)
 end;
 
 procedure InitCursor(var cur: cursor);
@@ -199,7 +189,11 @@ begin
 	begin
 		screen[coordX, coordY].color := White;
 		screen[coordX, coordY].symbol := 32
-	end
+	end;
+  if code = 49 {1} then
+    screen[coordX, coordY].color := cur.DRColor;
+  if code = 50 then {2}
+    screen[coordX, coordY].symbol := cur.DRSymbol
 end;
 
 {Screen rendering}
@@ -222,7 +216,7 @@ begin
 	TextColor(screen[cur.X, cur.Y].color);
 	write(chr(screen[cur.X, cur.Y].symbol))
 end;
-
+  
 {$I-}
 
 procedure NewFile(var f: ImageFile; filename: string;
@@ -287,21 +281,51 @@ begin
 	close(f)
 end;
 
-procedure SyncFile(var f: ImageFile; var screen: ImageArray;
-																						code: integer);
+procedure SyncFile(var f: ImageFile; var screen: ImageArray);
 var
 	coordX, coordY: integer;
 	n: integer;
 begin
-	if (code = cdraw) or (code = cdelete) then
-	begin
-		coordX := WhereX;
-		coordY := WhereY;
-		n := ((coordX - 1) * (ScreenHeight - 1)) + coordY;
-		seek(f, n);
-		write(f, screen[CoordX, CoordY]);
-		IOResultWriteFile
-	end
+  coordX := WhereX;
+  coordY := WhereY;
+  n := ((coordX - 1) * (ScreenHeight - 1)) + coordY;
+  seek(f, n);
+  write(f, screen[CoordX, CoordY]);
+  IOResultWriteFile
+
+end;
+
+procedure GlobalInput(var f: ImageFile; var screen: ImageArray;
+                      var cur: cursor; var exitmark: boolean);
+var
+  a, b: integer;
+begin
+  GetKey(a);
+  if a = ccolor then
+  begin
+    GetKey(b);
+    DrawColor(cur, b);
+    SyncScreen(screen, cur, b);
+    SyncFile(f, screen)
+  end
+  else if (a = right) or (a = left)
+    or (a = down) or (a = up) then
+  begin
+    MoveCursor(cur, a)
+  end
+  else if (a = cdraw) or (a = cdelete) then
+  begin
+    SyncScreen(screen, cur, a);
+    SyncFile(f, screen)
+  end
+  else if (a >= 33) and (a <= 126) then
+  begin
+    DrawSymbol(cur, a)
+  end
+  else if a = cexit then
+  begin
+    exitmark := true
+  end
 end;
 
 procedure ReadString(code: integer; var s: string);
@@ -357,6 +381,7 @@ var
 	screen: ImageArray;
 	AsyaDrawFile: ImageFile;
 	filename, enter: string;
+  exitmark: boolean = false;
 BEGIN
 	InitCursor(cur);
 	InitScreen(screen);
@@ -393,16 +418,18 @@ BEGIN
       FullUpdateScreen(screen);
       TextColor(White);
       PrintInfo;
-      repeat
-        GetKey(code);
-        DrawColor(cur, code);
-        DrawSymbol(cur, code);
+      while true do
+      begin
+        GlobalInput(AsyaDrawFile, screen, cur, exitmark);
         PrintInfo;
         UpdateScreenUnderCur(screen, cur);
-        MoveCursor(cur, code);
-        SyncScreen(screen, cur, code);
-        SyncFile(AsyaDrawFile, screen, code);
-      until code = cexit;
+        ShowCursor(cur);
+        if exitmark then
+        begin
+          exitmark := false;
+          break
+        end
+      end;
       close(AsyaDrawFile);
       InitScreen(screen);
       PrintStartScreen;

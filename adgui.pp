@@ -90,7 +90,7 @@ var
 	yyelow: string = 'y - Yellow';
 	wwhite: string = 'w - White';
 	control: string = 'Arrows - Move; Any key - Brush; Space - Draw; Backspace - delete';
-	vers: string = 'V0.2 (2023.05.07)';
+	vers: string = 'V0.2.1 (2023.05.08)';
 	project: string = 'New/Open File: ';
   abpage: string = 'Type /about - for more information or /help - for help';
 begin
@@ -193,11 +193,12 @@ var
   s10: string = 'or  "#"  key.  To  change the  drawing color,  use double tab or alternately';
   s11: string = 'press  tab and then any of the keys  "b"/ "u"/ "g"/ "c"/ "r"/ "m"/ "o"/ "l"/';
   s12: string = '"d"/ "n"/ "a"/ "e"/ "t"/ "y"/ "w".  Press  the space bar to draw a symbol on';
-  s13: string = 'the screen. And backspace to delete the character.';
-  s14: string = 'SAVE & EXIT';
-  s15: string = 'Your work is saved in real time. Press escape to exit the program.  You will';
-  s16: string = 'see  your image file  in the directory  from which the program was launched.';
-  s17: string = 'To open it, use AsyaDraw.';
+  s13: string = 'the screen.  And  backspace to delete the character.  Use tab + 2  to change';
+  s14: string = 'just the character.';
+  s15: string = 'SAVE & EXIT';
+  s16: string = 'Your work is saved in real time. Press escape to exit the program.  You will';
+  s17: string = 'see  your image file  in the directory  from which the program was launched.';
+  s18: string = 'To open it, use AsyaDraw.';
 begin
   clrscr;
   cX := ScreenWidth div 2;
@@ -216,11 +217,12 @@ begin
   PrintAnyMes(White, Black, cX - Length(s8) div 2, cY + 5, s11);
   PrintAnyMes(White, Black, cX - Length(s8) div 2, cY + 6, s12);
   PrintAnyMes(White, Black, cX - Length(s8) div 2, cY + 7, s13);
-  cY := 17;
-  PrintAnyMes(LightCyan, Black, cX - Length(s14) div 2, cY, s14);
-  PrintAnyMes(White, Black, cX - Length(s15) div 2, cY + 1, s15);
-  PrintAnyMes(White, Black, cX - Length(s15) div 2, cY + 2, s16);
-  PrintAnyMes(White, Black, cX - Length(s15) div 2, cY + 3, s17);
+  PrintAnyMes(White, Black, cX - Length(s8) div 2, cY + 8, s14);
+  cY := 18;
+  PrintAnyMes(LightCyan, Black, cX - Length(s15) div 2, cY, s15);
+  PrintAnyMes(White, Black, cX - Length(s16) div 2, cY + 1, s16);
+  PrintAnyMes(White, Black, cX - Length(s16) div 2, cY + 2, s17);
+  PrintAnyMes(White, Black, cX - Length(s16) div 2, cY + 3, s18);
 end;
 
 procedure PrintFrame(x, y, sizeX, sizeY: integer);

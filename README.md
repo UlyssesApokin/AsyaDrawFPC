@@ -79,12 +79,20 @@ Do not open files of other applications in AsyaDraw.
 * Keys A..Z, a..z, 0.. 9, !../ - Brush
 * Tab + tab,b,u,g,c,r,m,o,l,d,n,a,e,t,y,w - Change colors
 * Space - Draw
+* Tab + 1 - Draw only color
+* Tab + 2 - Draw only symbol
 * Backspace - Delete
 * Escape - Save & exit
 
 * "/about" - Read application information
 
 ## History of changes
+
+#### v0.2.1 (2023/05/08)
+
+* New drawing tool
+* Code optimization
+* Bug fixed
 
 #### v0.2 (2023/05/07)
 
