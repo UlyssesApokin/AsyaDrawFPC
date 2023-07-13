@@ -351,7 +351,7 @@ end;
 
 procedure GetFilename(s: string; var filename: string);
 begin
-	filename := s;
+	filename := s
 end;
 
 
