@@ -120,7 +120,7 @@ begin
 	GotoXY(10, 1);
 	TextColor(cur.DRColor);
 	write(chr(cur.DRSymbol));
-	GotoXY(cur.X, cur.Y);
+	GotoXY(cur.X, cur.Y)
 end;
 
 procedure CurWithinBorders(var cur: cursor);
