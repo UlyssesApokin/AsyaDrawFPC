@@ -268,7 +268,7 @@ begin
     y := ScrnRes.symbol;
 		MessageScaleScreen(x, y);
 		halt(1);
-		exit;
+		exit
 	end;
 	for coordX := 1 to ScreenWidth do
 		for coordY := 1 to ScreenHeight - 1 do
